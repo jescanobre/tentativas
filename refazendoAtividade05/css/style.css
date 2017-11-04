@@ -1,0 +1,56 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.cabecalho {
+    background-color: brown;
+    height: 60px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.cabecalho #nome {
+    color: White;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding-left: 20px;
+    font-size: 28px;
+}
+
+.cabecalho #bt-sanduiche {
+    background-color: brown;
+    border: none;
+    padding-right: 10px; 
+    font-size: 28px;
+    float: left;
+    color: white;
+}
+
+.container {
+    width: calc(100% - 200px);
+}
+
+.container .nav-lateral {
+    background-color: rgb(201, 52, 52);
+    width: 200px;
+    height: calc(100vh - 60px);
+
+}
+
+.container .nav-lateral ul {
+    list-style: none;
+    padding: 15px;
+}
+
+.container .nav-lateral ul>li {
+    padding: 7.5px 0 7.5px 0;
+}
+
+.container .nav-lateral ul > li > a{
+    text-decoration: none;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 18px;
+}
+
+

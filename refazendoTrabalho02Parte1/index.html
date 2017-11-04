@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Trabalho 02 - Parte 01</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .layout {
+            width: 900px;
+            height: 100vh;
+            margin: auto;
+            background-color: #f3f2f2;
+        }
+
+        .cabecalho {
+            background-color: rgb(224, 55, 86);
+            height: 60px;
+            box-sizing: border-box;
+            position: relative;
+        }
+        
+        .cabecalho .titulo {
+            float: left;
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 38px;
+            margin-left: 20px; 
+            overflow: auto;
+            
+        }
+
+        .cabecalho #amigo-selecionado {
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 17px;
+            position: relative;
+            text-align: center;
+            margin: auto;
+            box-sizing: border-box;
+            top: 20px;
+            left: 200px;
+        }
+
+        .cabecalho .botao{
+            float: left;
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 15px;
+            background-color: rgba(128, 128, 128, 0.856);
+            cursor: pointer;
+            border: none;
+            padding: 6px 8px;
+            position: relative;
+            outline: none;
+            top: 50%;
+            left: 74%;           
+            transform: translate(0%, -50%);
+        }
+
+        .botao:hover {
+            background-color: white;
+            color: rgba(128, 128, 128, 0.856);
+        }
+
+        .lista-amigos {
+            width: 200px;
+            height: calc(100vh - 60px); 
+            background-color: #efefef;
+            box-shadow: 2px 0px 3px #80878A;
+            text-align: left;
+            box-sizing: border-box;
+            float:left;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 14px;
+            padding: 20px;
+        }
+
+        .container .lista-amigos ul {
+            list-style: none;
+            /* padding: 20px; */
+        }
+
+        /* .lista-amigos ul > li:hover {
+            background-color: white;
+        } */
+
+        .lista-amigos ul > li > a {
+            text-decoration: none;
+            color: black;
+            cursor: pointer;
+            /* top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); */
+        }
+
+        .container .lista-amigos ul > li > a > img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            padding: 5px 0 5px 0; 
+        }
+         
+        .mensagens {
+            margin-left: 20px;
+            margin-top: 20px;
+            font-family: Helvetica, Arial, sans-serif;   
+            float: left;
+        }
+
+        .mensagens .mensagem {
+            background-color: #b9b5b5;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .mensagens .mensagem .titulo-mensagem {
+            padding: 10px;
+            margin-top: 3px;
+            color: rgb(194, 38, 69);
+            font-size: 12px;
+        }
+
+        .mensagens .mensagem .conteudo-mensagem {
+            padding: 3px 15px 15px 15px;
+            color: rgb(58, 55, 56);
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="layout">
+        <header class="cabecalho">
+            <span class="titulo"> Universe </span>
+            <span class="amigo-selecionado"> Amigo Selecionado</span>
+            <button class="botao"> Entrar</button>
+        </header>
+
+        <div class="container">
+            <div class="lista-amigos">
+                <nav>
+                    <ul>
+                        <!-- <li> <a href="#"> <img src="img/amigo.png" alt=""> Amigo 01 </a></li>
+                        <li> <a href="#"> <img src="img/amigo.png" alt=""> Amigo 02 </a></li>
+                        <li> <a href="#"> <img src="img/amigo.png" alt=""> Amigo 03 </a></li> -->
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="mensagens">
+                <!-- <div class="amigo-selecionado">
+                    <span>joao03</span>
+                </div> -->
+<!-- 
+                <div class="mensagem">
+                    <div class="titulo-mensagem">
+                        <span class="usuario"> joao03 </span>
+                    </div>
+                    <div class="conteudo-mensagem">
+                        <p class="texto"> Tudo bem?</p>
+                    </div>
+                </div>
+    
+                <div class="mensagem">
+                    <div class="titulo-mensagem">
+                        <span class="usuario"> victor23 </span>
+                    </div>
+                    <div class="conteudo-mensagem">
+                        <p class="texto"> Tudo tranqs</p>
+                    </div>
+                </div>
+
+                <div class="mensagem">
+                    <div class="titulo-mensagem">
+                        <span class="usuario"> joao03 </span>
+                    </div>
+                    <div class="conteudo-mensagem">
+                        <p class="texto"> Que bom</p>
+                    </div>
+                </div> -->
+            </div>
+        </div> <!-- fim do container -->
+
+        </div>
+    <!-- </div>  -->
+
+    <script>
+        let amigosMensagens = [
+            { 
+                "usuario": "joao03",
+                "nome": "João",
+                "mensagens": 
+                [    
+                    {
+                        "usuario": "joao03",
+                        "texto": "Tudo bem?"
+                    },
+                    {
+                        "usuario": "victor23",
+                        "texto": "Tudo Tranqs"
+                    },
+                    {
+                        "usuario": "joao03",
+                        "texto": "Que bom"
+                    },
+                ]
+            },
+            { 
+                "usuario": "maria2000",
+                "nome": "Maria",
+                "mensagens": 
+                [
+                    {
+                        "usuario": "maria2000",
+                        "texto": "Na paz?"
+                    },
+                    {
+                            "usuario": "victor23",
+                            "texto": "Show"
+                    },
+                    {
+                            "usuario": "maria2000",
+                            "texto": "Que bom"
+                    },
+                ]
+            },
+            { 
+                "usuario": "robson_alves",
+                "nome": "Robson Alves",
+                "mensagens": 
+                [
+                    {
+                        "usuario": "victor23",
+                        "texto": "Bom?"
+                    },
+                    {
+                        "usuario": "robson_alves",
+                        "texto": "Bom"
+                    },
+                    {
+                        "usuario": "victor23",
+                        "texto": "Que bom"
+                    },
+                ]
+            }
+        ];
+    //pra deixar o nome do mensageiro como retorno 
+    //a página inicial (hipotetaticamente)
+    //na verdade com o click no nome do mensageiro tudo o que 
+    //tá na tela some.
+        let sof = document.querySelector(".titulo");
+        sof.style.cursor = "pointer";
+
+            sof.addEventListener("click", function(){
+            let divMensagens = document.getElementsByClassName("mensagens")[0];
+            divMensagens.innerHTML = " ";
+        });
+       
+        let mensagens = document.querySelector(".mensagens");
+        let amigoSelecionado = document.querySelector(".amigo-selecionado");
+        let amigos = [];
+        let usuarioNome = {};
+    //é o que man?
+        for(i=0; i<amigosMensagens.length; i++) {
+            amigos.push(amigosMensagens[i].usuario);
+            usuarioNome[amigosMensagens[i].usuario] = amigosMensagens[i].nome;
+        }
+    //por que isso?
+        // usuarioNome["victor23"] = "Victor";
+        let listaAmigos = document.querySelector(".lista-amigos");
+        listaAmigos = document.getElementsByTagName("ul")[0];
+
+        function mostrarMensagens() {
+            let links = document.getElementsByClassName("linkAmigo");
+            let divMensagens = document.getElementsByClassName("mensagens")[0];
+            
+            // nomeAmigo.innerHTML = "";
+            //é necessário?
+            divMensagens.innerHTML = ""; 
+
+            // for (let i = 0; i < links.length; i++){
+                // let link = links[i];
+                // link.idx=i;
+                // links[i].addEventListener("click", function(){
+                //     i = this.idx;
+                //     divMensagens.innerHTML = " ";
+                let mensagem = document.createElement("div");
+                mensagem.setAttribute("class", "mensagem");
+
+                let tituloMensagem = document.createElement("div");
+                tituloMensagem.setAttribute("class", "titulo-mensagem" /*"titulo-mensagem" ou "tituloMensagem"?*/);
+                let usuario = document.createElement("span");
+                usuario.setAttribute("class", "usuario");
+                usuario.createTextNode(amigosMensagens[i].nome);
+
+                let conteudoMensagem = document.createElement("div");
+                conteudoMensagem.setAttribute("class", "conteudo-mensagem"/*"conteudo-mensagem" ou "conteudoMensagem"?*/);
+                let texto = document.createElement("p");
+                texto.setAttribute("class", "texto");
+
+                conteudoMensagem.appendChild(texto);
+                tituloMensagem.appendChild(usuario);
+                mensagem.appendChild(tituloMensagem);
+                mensagem.appendChild(usuario);
+                divMensagens.appendChild(mensagem);
+
+
+/*
+<div class="mensagem">
+                    <div class="titulo-mensagem">
+                        <span class="usuario"> joao03 </span>
+                    </div>
+                    <div class="conteudo-mensagem">
+                        <p class="texto"> Tudo bem?</p>
+                    </div>
+                </div>
+*/
+            }
+            
+        // }
+
+        function mostrarAmigos (amigos, lista){
+            for (let i = 0; i < amigos.length; i++) {
+                let itemLista = document.createElement("li");
+                let link = document.createElement("a");
+                link.setAttribute("class", "linkAmigo");
+
+                let avatar = document.createElement("img");
+                avatar.src = "img/amigo.png";
+
+                let nomeAmigo = document.createTextNode(usuarioNome[amigos[i]]);                
+
+                link.appendChild(avatar);
+                link.appendChild(nomeAmigo);
+                itemLista.appendChild(link);
+                lista.appendChild(itemLista);
+
+                itemLista.addEventListener("click", function(){
+                    mostrarMensagens();
+
+                    for(let i = 0; amigos.length; i++){
+                        amigos[i].classList.remove("active");
+                    }
+
+                    this.classList.add("active");
+                });
+            }
+        }
+        
+        mostrarAmigos(amigos, listaAmigos);
+        //isso aqui tava dando undefined
+        // window.addEventListener("load", function() {
+        //     for (let i = 0; i < amigos.length; i++) {
+        //         mostrarAmigos(amigos, listaAmigos);
+        //     }
+        //  })
+
+    </script>
+</body>
+</html>
