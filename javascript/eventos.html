@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Eventos</title>
+
+    <style>
+        .grande {
+            width: 200px;
+            height: 200px;
+        }
+
+        .botao {
+            border: none;
+            background-color: gray;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <button class="botao"> Clica em mim  </button>
+
+    <script>
+
+        let botao = document.querySelector(".botao");
+
+        function clique() {
+            botao.classList.toggle("grande");
+        }
+
+        function mouseEntrou() {
+            botao.style.backgroundColor = "rgb(236, 65, 96)";
+        }
+
+        function mouseSaiu() {
+            botao.style.backgroundColor = "green";
+        }
+
+        botao.addEventListener("click", clique);
+        botao.addEventListener("mouseover", mouseEntrou);
+        botao.addEventListener("mouseout", mouseSaiu);
+    </script>
+</body>
+</html>

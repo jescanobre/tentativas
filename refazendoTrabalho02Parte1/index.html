@@ -36,7 +36,7 @@
             
         }
 
-        .cabecalho #amigo-selecionado {
+        .cabecalho .amigo-selecionado {
             color: white;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             font-size: 17px;
@@ -48,7 +48,7 @@
             left: 200px;
         }
 
-        .cabecalho .botao{
+        .cabecalho .botao {
             float: left;
             color: white;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -84,7 +84,6 @@
 
         .container .lista-amigos ul {
             list-style: none;
-            /* padding: 20px; */
         }
 
         /* .lista-amigos ul > li:hover {
@@ -93,11 +92,7 @@
 
         .lista-amigos ul > li > a {
             text-decoration: none;
-            color: black;
             cursor: pointer;
-            /* top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%); */
         }
 
         .container .lista-amigos ul > li > a > img {
@@ -106,6 +101,10 @@
             border-radius: 50%;
             padding: 5px 0 5px 0; 
         }
+
+        .container .lista-amigos ul > li > a {
+            color: black;
+        } 
          
         .mensagens {
             margin-left: 20px;
@@ -138,7 +137,7 @@
     <div class="layout">
         <header class="cabecalho">
             <span class="titulo"> Universe </span>
-            <span class="amigo-selecionado"> Amigo Selecionado</span>
+            <span class="amigo-selecionado"> </span>
             <button class="botao"> Entrar</button>
         </header>
 
@@ -147,16 +146,12 @@
                 <nav>
                     <ul>
                         <!-- <li> <a href="#"> <img src="img/amigo.png" alt=""> Amigo 01 </a></li>
-                        <li> <a href="#"> <img src="img/amigo.png" alt=""> Amigo 02 </a></li>
-                        <li> <a href="#"> <img src="img/amigo.png" alt=""> Amigo 03 </a></li> -->
+                        -->
                     </ul>
                 </nav>
             </div>
 
             <div class="mensagens">
-                <!-- <div class="amigo-selecionado">
-                    <span>joao03</span>
-                </div> -->
 <!-- 
                 <div class="mensagem">
                     <div class="titulo-mensagem">
@@ -186,9 +181,7 @@
                 </div> -->
             </div>
         </div> <!-- fim do container -->
-
-        </div>
-    <!-- </div>  -->
+    </div>
 
     <script>
         let amigosMensagens = [
@@ -250,116 +243,84 @@
                 ]
             }
         ];
-    //pra deixar o nome do mensageiro como retorno 
-    //a página inicial (hipotetaticamente)
-    //na verdade com o click no nome do mensageiro tudo o que 
-    //tá na tela some.
-        let sof = document.querySelector(".titulo");
-        sof.style.cursor = "pointer";
-
-            sof.addEventListener("click", function(){
-            let divMensagens = document.getElementsByClassName("mensagens")[0];
-            divMensagens.innerHTML = " ";
-        });
-       
-        let mensagens = document.querySelector(".mensagens");
-        let amigoSelecionado = document.querySelector(".amigo-selecionado");
+            
+        
+        // let mensagens = document.querySelector(".mensagens");
+        
         let amigos = [];
-        let usuarioNome = {};
-    //é o que man?
-        for(i=0; i<amigosMensagens.length; i++) {
+        let amigoNome = {};
+
+        for(let i = 0; i<amigosMensagens.length; i++) {
             amigos.push(amigosMensagens[i].usuario);
-            usuarioNome[amigosMensagens[i].usuario] = amigosMensagens[i].nome;
+            amigoNome[amigosMensagens[i].usuario] = amigosMensagens[i].nome;
         }
-    //por que isso?
-        // usuarioNome["victor23"] = "Victor";
+
         let listaAmigos = document.querySelector(".lista-amigos");
-        listaAmigos = document.getElementsByTagName("ul")[0];
+        listaAmigos = listaAmigos.getElementsByTagName("ul")[0];
 
-        function mostrarMensagens() {
-            let links = document.getElementsByClassName("linkAmigo");
-            let divMensagens = document.getElementsByClassName("mensagens")[0];
-            
-            // nomeAmigo.innerHTML = "";
-            //é necessário?
-            divMensagens.innerHTML = ""; 
-
-            // for (let i = 0; i < links.length; i++){
-                // let link = links[i];
-                // link.idx=i;
-                // links[i].addEventListener("click", function(){
-                //     i = this.idx;
-                //     divMensagens.innerHTML = " ";
-                let mensagem = document.createElement("div");
-                mensagem.setAttribute("class", "mensagem");
-
-                let tituloMensagem = document.createElement("div");
-                tituloMensagem.setAttribute("class", "titulo-mensagem" /*"titulo-mensagem" ou "tituloMensagem"?*/);
-                let usuario = document.createElement("span");
-                usuario.setAttribute("class", "usuario");
-                usuario.createTextNode(amigosMensagens[i].nome);
-
-                let conteudoMensagem = document.createElement("div");
-                conteudoMensagem.setAttribute("class", "conteudo-mensagem"/*"conteudo-mensagem" ou "conteudoMensagem"?*/);
-                let texto = document.createElement("p");
-                texto.setAttribute("class", "texto");
-
-                conteudoMensagem.appendChild(texto);
-                tituloMensagem.appendChild(usuario);
-                mensagem.appendChild(tituloMensagem);
-                mensagem.appendChild(usuario);
-                divMensagens.appendChild(mensagem);
-
-
-/*
-<div class="mensagem">
-                    <div class="titulo-mensagem">
-                        <span class="usuario"> joao03 </span>
-                    </div>
-                    <div class="conteudo-mensagem">
-                        <p class="texto"> Tudo bem?</p>
-                    </div>
-                </div>
-*/
-            }
-            
-        // }
-
-        function mostrarAmigos (amigos, lista){
-            for (let i = 0; i < amigos.length; i++) {
-                let itemLista = document.createElement("li");
-                let link = document.createElement("a");
-                link.setAttribute("class", "linkAmigo");
-
+        function mostrarAmigos(amigos, lista) {
+            for (let i = 0; i<amigos.length; i++){
+                let amigo = document.createElement("li");
+                let linkAmigo = document.createElement("a");
+                linkAmigo.setAttribute("class", "linkAmigo");
                 let avatar = document.createElement("img");
                 avatar.src = "img/amigo.png";
-
-                let nomeAmigo = document.createTextNode(usuarioNome[amigos[i]]);                
-
-                link.appendChild(avatar);
-                link.appendChild(nomeAmigo);
-                itemLista.appendChild(link);
-                lista.appendChild(itemLista);
-
-                itemLista.addEventListener("click", function(){
-                    mostrarMensagens();
-
-                    for(let i = 0; amigos.length; i++){
-                        amigos[i].classList.remove("active");
-                    }
-
-                    this.classList.add("active");
-                });
+                let textoNome = document.createTextNode(amigoNome[amigos[i]]);
+            
+                linkAmigo.appendChild(avatar);
+                linkAmigo.appendChild(textoNome);
+                amigo.appendChild(linkAmigo);
+                lista.appendChild(amigo);
             }
         }
-        
+        let amigoSelecionado = document.querySelector(".amigo-selecionado");
+
+        function mostrarMensagens() {
+            let linksAmigos = document.getElementsByClassName("linkAmigo");
+            let divMensagens = document.getElementsByClassName("mensagens")[0];
+            
+            amigoSelecionado.innerHTML = "";
+
+            let mensagem = document.createElement("div");
+            mensagem.setAttribute("class", "mensagem");
+
+            let tituloMensagem = document.createElement("div");
+            tituloMensagem.setAttribute("class", "titulo-mensagem");
+            let usuario = document.createElement("span");
+            usuario.setAttribute("class", "usuario");
+            // usuario.createTextNode(amigoNome[amigosMensagens[i].mensa])
+
+            let conteudoMensagem = document.createElement("div");
+            conteudoMensagem.setAttribute("class", "conteudo-mensagem");
+            let texto = document.createElement("p");
+            texto.setAttribute("class", "texto");
+
+            conteudoMensagem.appendChild(texto);
+            tituloMensagem.appendChild(usuario);
+
+            mensagem.appendChild(tituloMensagem);
+            mensagem.appendChild(conteudoMensagem);
+
+            divMensagens.appendChild(mensagem);
+
+            console.log(divMensagens);
+//  <div class="mensagem">
+//                     <div class="titulo-mensagem">
+//                         <span class="usuario"> joao03 </span>
+//                     </div>
+//                     <div class="conteudo-mensagem">
+//                         <p class="texto"> Tudo bem?</p>
+//                     </div>
+//                 </div>
+            // for (let j = 0; j <linksAmigos.length; i++){
+                
+            // }
+
+        }
+
         mostrarAmigos(amigos, listaAmigos);
-        //isso aqui tava dando undefined
-        // window.addEventListener("load", function() {
-        //     for (let i = 0; i < amigos.length; i++) {
-        //         mostrarAmigos(amigos, listaAmigos);
-        //     }
-        //  })
+        mostrarMensagens();
+
 
     </script>
 </body>
