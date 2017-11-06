@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Modal</title>
+
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .abrir-modal {
+        padding: 4px;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        background-color: #c42444;
+        width: 30%;
+        top: 15%;
+        left: 35%;
+        border-radius: 20px 20px 20px 20px;
+        animation-name: splash;
+        animation-duration: 600ms; 
+    }
+
+    .modal .modal-cabecalho {
+        padding: 20px;
+        background-color:#a5213e;
+        color: white;
+        border-radius: 20px 20px 0px 0px;
+        overflow: auto;
+    }
+
+    .modal .modal-corpo {
+        padding: 30px;
+        color: white;
+        border-radius: 0px 0px 20px 20px;
+    }
+
+    .modal .form-labels {
+        float: left;
+    }
+
+    .modal #form-submit {
+        padding: 5px;
+        margin: 15px 0px;
+        cursor: pointer;
+      }
+
+    .modal-overlay {
+        display: none;
+        position: fixed;
+        background-color: rgba(0,0,0,0.8);
+        width: 100%;
+        height: 100%;
+        animation-name: fade;
+        animation-duration: 600ms;
+    }
+
+    .modal .modal-cabecalho .title {
+        float: left;
+    }
+
+    .modal .modal-cabecalho .modal-fechar {
+        float: right;
+        display: block;
+        padding: 5px;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .modal .modal-cabecalho .modal-fechar:hover {
+        background-color: #c42444;
+    } 
+
+    .contatos h2 {
+        color: green;
+    }
+
+    .contatos .contato {
+        color: purple;
+    }
+
+    @keyframes fade {
+        from {
+            background-color: rgba(0,0,0,0); 
+        } to {
+            background-color: rgba(0,0,0,0.8);
+        }
+    }
+
+    @keyframes splash {
+        from {
+            top: -30%;
+            transform: scale(1,0);
+        } to {
+            top: 15%;
+            transform: scale(1,1);
+        }
+    }
+
+    </style>
+</head>
+<body>
+    <div class="modal-overlay">
+            
+    </div>
+
+    <div class="contatos">
+        <h2>Meus contatos</h2>
+        <div class="contato">
+            <span>Pedro</span>
+            <span> - pedro@email.com</span>
+        </div>
+    </div>
+    <button class="abrir-modal">Cadastrar-se</button>
+    
+    <div class="modal">
+        <div class="modal-cabecalho">
+            <h2 class="title">
+                Insira seus dados
+            </h2>
+            <span class="modal-fechar"> X </span>
+        </div>
+
+        <div class="modal-corpo">
+            <form action="">
+                <div class="form-labels">
+                    <label for="nome">Nome:</label>
+                    <br>
+                    <label for="email">Email:</label>
+                    <br>
+                    <input type="submit" id="form-submit">
+                </div>
+
+                <div class="form-inputs">
+                    <input type="text" placeholder="Escreva seu nome" id="nome">
+                    <br>
+                    <input type="text" placeholder="Escreva seu e-mail" id="email">
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        let cadastrar = document.querySelector(".abrir-modal");
+        let modalFechar = document.querySelector(".modal-fechar");
+        let modal = document.querySelector(".modal");
+        let modalOverlay = document.querySelector(".modal-overlay");
+        
+        let nomeInput = document.querySelector("#nome");
+        let emailInput = document.querySelector("#email");
+        let formsubmit = document.querySelector("#form-submit")
+
+        function fecharModal() {
+            modal.style.display = "none";
+            modalOverlay.style.display = "none";
+            
+            nomeInput.value = ""; 
+            emailInput.value = "";
+        }
+
+        function abrirModal() {
+            modal.style.display = "block";
+            modalOverlay.style.display = "block";
+        }
+
+        cadastrar.addEventListener("click", function(){
+            abrirModal();
+        });
+
+        modalFechar.addEventListener("click", function(){
+            fecharModal();
+        });
+
+        window.addEventListener("click", function(){
+            if(event.target==modalOverlay) {
+                fecharModal();
+            }
+        });
+
+        let contatos = document.querySelector(".contatos");
+
+        function addContatos(nome, email) {
+            let contato = document.createElement("div");
+            let span1 = document.createElement("span");
+            let span2 = document.createElement("span");
+            let texto1 = document.createTextNode(nome);
+            let texto2 = document.createTextNode(" - " + email);
+
+            contato.classList.add("contato")
+
+            span1.appendChild(texto1);
+            span2.appendChild(texto2);
+            contato.appendChild(span1);
+            contato.appendChild(span2);
+            contatos.appendChild(contato);
+
+            console.log(contato);
+        }
+
+        formsubmit.addEventListener("click", function(){
+            event.preventDefault();
+            addContatos(nomeInput.value, emailInput.value);
+            fecharModal();
+        });
+        
+    </script>
+</body>
+</html>

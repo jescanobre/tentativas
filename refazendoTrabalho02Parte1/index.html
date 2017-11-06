@@ -82,28 +82,33 @@
             padding: 20px;
         }
 
-        .container .lista-amigos ul {
+        /* .container .lista-amigos ul {
             list-style: none;
-        }
+        } */
 
         /* .lista-amigos ul > li:hover {
             background-color: white;
         } */
 
-        .lista-amigos ul > li > a {
+        /* .lista-amigos ul > li > a {
             text-decoration: none;
+            cursor: pointer;
+        } */
+
+        .container .lista-amigos .amigo {
             cursor: pointer;
         }
 
-        .container .lista-amigos ul > li > a > img {
+        .container .lista-amigos .amigo .icon {
             width: 32px;
             height: 32px;
             border-radius: 50%;
             padding: 5px 0 5px 0; 
         }
 
-        .container .lista-amigos ul > li > a {
+        .container .lista-amigos .amigo .nome {
             color: black;
+            
         } 
          
         .mensagens {
@@ -143,12 +148,7 @@
 
         <div class="container">
             <div class="lista-amigos">
-                <nav>
-                    <ul>
-                        <!-- <li> <a href="#"> <img src="img/amigo.png" alt=""> Amigo 01 </a></li>
-                        -->
-                    </ul>
-                </nav>
+                
             </div>
 
             <div class="mensagens">
@@ -244,82 +244,168 @@
             }
         ];
             
+
+    let listaAmigos = document.querySelector(".lista-amigos")
+    let mensagensCss = document.querySelector(".mensagens");
+    let amigoSelecionado = document.querySelector(".amigo-selecionado");
+
+    let amigos = [];
+
+    function mostrarMensagens(friend){
+        let mensagens = friend.mensagens;
+        let textoNome = document.createTextNode(friend.nome);
+
+        amigoSelecionado.innerHTML = "";
+        mensagensCss.innerHTML = "";
+
+        amigoSelecionado.appendChild(textoNome);
+
+        for(let i = 0; i < mensagens.length; i++) {
+            let mensagem = mensagens[i];
+            let divMensagem = document.createElement("div");
+            
+            let tituloMensagem = document.createElement("div");
+            let usuario = document.createElement("span");
+            let textUser = document.createTextNode(mensagem.usuario);
+            
+            let conteudoMensagem = document.createElement("div");
+            let texto = document.createElement("p");
+            let textTexto = document.createTextNode(mensagem.texto);
+
+            divMensagem.classList.add("mensagem");
+            tituloMensagem.classList.add("titulo-mensagem");
+            conteudoMensagem.classList.add("conteudo-mensagem");
+            
+            usuario.appendChild(textUser);
+            texto.appendChild(textTexto);
+            tituloMensagem.appendChild(usuario); 
+            conteudoMensagem.appendChild(texto);  
+            divMensagem.appendChild(tituloMensagem);
+            divMensagem.appendChild(conteudoMensagem);
+
+            mensagensCss.appendChild(divMensagem);
+
+            // console.log(mensagem.usuario);
+            // console.log(mensagem.texto);
+            // console.log(mensagensCss);
+        }
+
         
+    }
+
+    function mostrarAmigos(friend) {
+        let amigo = document.createElement("div");
+        let avatar = document.createElement("img");
+        let nome = document.createElement("span");
+        let textoNome = document.createTextNode(friend.nome);
+
+        avatar.src = "img/amigo.png";
+
+        amigo.classList.add("amigo");
+        avatar.classList.add("icon");
+        nome.classList.add("nome");
+
+        nome.appendChild(textoNome);
+        amigo.appendChild(avatar);
+        amigo.appendChild(nome);
+
+        listaAmigos.appendChild(amigo);
+        amigos.push(amigo);
+        
+        amigo.addEventListener("click", function(){
+            mostrarMensagens(friend);
+
+            for(let i =0; i<amigos.length; i++){
+                amigos[i].classList.remove("active");
+            }
+
+            this.classList.add("active");
+
+        });
+
+        console.log(amigos);
+    } 
+    
+    // console.log(listaAmigos);
+
+     for(let i =0; i<amigosMensagens.length; i++){
+        mostrarAmigos(amigosMensagens[i]);
+     }
+        // let listaAmigos = document.querySelector(".lista-amigos")
         // let mensagens = document.querySelector(".mensagens");
         
-        let amigos = [];
-        let amigoNome = {};
+        // let amigos = [];
+        // let amigoNome = {};
 
-        for(let i = 0; i<amigosMensagens.length; i++) {
-            amigos.push(amigosMensagens[i].usuario);
-            amigoNome[amigosMensagens[i].usuario] = amigosMensagens[i].nome;
-        }
+        //   for(let i = 0; i<amigosMensagens.length; i++) {
+        //     amigos.push(amigosMensagens[i].usuario);
+        //     amigoNome[amigosMensagens[i].usuario] = amigosMensagens[i].nome;
+        //  }
+        
+        // function mostrarAmigos(friend) {
+        //     let amigo = document.createElement("div");
+        //     let avatar = document.createElement("img");
+        //     let nome = document.createElement("span");
+        //     let textoNome = document.createTextNode(usuarioNome[amigos[i]]);
 
-        let listaAmigos = document.querySelector(".lista-amigos");
-        listaAmigos = listaAmigos.getElementsByTagName("ul")[0];
-
-        function mostrarAmigos(amigos, lista) {
-            for (let i = 0; i<amigos.length; i++){
-                let amigo = document.createElement("li");
-                let linkAmigo = document.createElement("a");
-                linkAmigo.setAttribute("class", "linkAmigo");
-                let avatar = document.createElement("img");
-                avatar.src = "img/amigo.png";
-                let textoNome = document.createTextNode(amigoNome[amigos[i]]);
+        //     avatar.src = "img/amigo.png";
             
-                linkAmigo.appendChild(avatar);
-                linkAmigo.appendChild(textoNome);
-                amigo.appendChild(linkAmigo);
-                lista.appendChild(amigo);
-            }
-        }
-        let amigoSelecionado = document.querySelector(".amigo-selecionado");
 
-        function mostrarMensagens() {
-            let linksAmigos = document.getElementsByClassName("linkAmigo");
-            let divMensagens = document.getElementsByClassName("mensagens")[0];
+        //     amigo.classList.add("amigo");
+        //     avatar.classList.add("icon");
+        //     nome.classList.add("nome");
+
+        //     nome.appendChild(textoNome);
+        //     amigo.appendChild(avatar);
+        //     amigo.appendChild(nome);
+
+        //     listaAmigos.appendChild(amigo);
+        //     amigos.push(amigo);
+
+        //     console.log(nome);
+        //     } 
+        
+
+        //  for(let i =0; i<amigos.length; i++){
+            //  mostrarAmigos(amigos);
+        //  }
+        
+
+        // let amigoSelecionado = document.querySelector(".amigo-selecionado");
+
+        // function mostrarMensagens(amigos) {
+        //     let linksAmigos = document.getElementsByClassName("linkAmigo");
+        //     let divMensagens = document.getElementsByClassName("mensagens")[0];
             
-            amigoSelecionado.innerHTML = "";
+        //     amigoSelecionado.innerHTML = "";
 
-            let mensagem = document.createElement("div");
-            mensagem.setAttribute("class", "mensagem");
+        //     let mensagem = document.createElement("div");
+        //     mensagem.setAttribute("class", "mensagem");
 
-            let tituloMensagem = document.createElement("div");
-            tituloMensagem.setAttribute("class", "titulo-mensagem");
-            let usuario = document.createElement("span");
-            usuario.setAttribute("class", "usuario");
-            // usuario.createTextNode(amigoNome[amigosMensagens[i].mensa])
+        //     let tituloMensagem = document.createElement("div");
+        //     tituloMensagem.setAttribute("class", "titulo-mensagem");
+        //     let usuario = document.createElement("span");
+        //     usuario.setAttribute("class", "usuario");
+        //     // usuario.createTextNode(amigoNome[amigosMensagens[i].mensa])
 
-            let conteudoMensagem = document.createElement("div");
-            conteudoMensagem.setAttribute("class", "conteudo-mensagem");
-            let texto = document.createElement("p");
-            texto.setAttribute("class", "texto");
+        //     let conteudoMensagem = document.createElement("div");
+        //     conteudoMensagem.setAttribute("class", "conteudo-mensagem");
+        //     let texto = document.createElement("p");
+        //     texto.setAttribute("class", "texto");
 
-            conteudoMensagem.appendChild(texto);
-            tituloMensagem.appendChild(usuario);
+        //     conteudoMensagem.appendChild(texto);
+        //     tituloMensagem.appendChild(usuario);
 
-            mensagem.appendChild(tituloMensagem);
-            mensagem.appendChild(conteudoMensagem);
+        //     mensagem.appendChild(tituloMensagem);
+        //     mensagem.appendChild(conteudoMensagem);
 
-            divMensagens.appendChild(mensagem);
+        //     divMensagens.appendChild(mensagem);
 
-            console.log(divMensagens);
-//  <div class="mensagem">
-//                     <div class="titulo-mensagem">
-//                         <span class="usuario"> joao03 </span>
-//                     </div>
-//                     <div class="conteudo-mensagem">
-//                         <p class="texto"> Tudo bem?</p>
-//                     </div>
-//                 </div>
-            // for (let j = 0; j <linksAmigos.length; i++){
-                
-            // }
+        //     console.log(divMensagens);
+        // }
 
-        }
-
-        mostrarAmigos(amigos, listaAmigos);
-        mostrarMensagens();
+        // mostrarAmigos(amigosMensagens);
+        // mostrarMensagens();
 
 
     </script>

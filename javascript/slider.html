@@ -71,7 +71,7 @@
 <body>
     
     <div class="slider">
-        <img class="active" src="img/1.jpg" alt="">
+        <img src="img/1.jpg" alt="" class="active">
         <img src="img/2.jpg" alt="">
         <img src="img/3.jpg" alt="">
 
@@ -86,64 +86,31 @@
     </div>
 
     <script>
-        let botaoEsquerda = document.querySelector(".seta.esquerda");
-        let botaoDireita = document.querySelector(".seta.direita");
-        /* selecionando todas as imagens, assim vai criar uma lista de imagens*/
+        let botaoEsquerdo = document.querySelector(".seta.esquerda");
+        let botaoDireito = document.querySelector(".seta.direita");
         let imagens = document.querySelectorAll(".slider img");
-        /* selecionando todos os dots, assim vai criar uma lista de dots*/
         let dots = document.querySelectorAll(".slider .sobreposicao .dot");
-        current = 0;
-    //por que primeiro remove a classe active e depois adiciona?
+        let current = 0;
+
+        /*preciso fazer uma função pra ir pro proximo slide
+        uma pra ir pro slide anterior
+        uma pra ir direto pro slide quando o dot for clicado*/
         
         function proximoSlide() {
             imagens[current].classList.remove("active");
             dots[current].classList.remove("active");
-            //incrementando o current para depois passar para a imagem e o dot seguinte.Quando somado 1 
-            //ao current atual, torna-se a posição da imagem no array
-            current ++;
-            // se o current for do tamanho da lista de imagens ele volta a ser 0 e volta pra primeira imagem
-            if(current > imagens.length-1) {
-                current=0;
-            }
-
-            imagens[current].classList.add("active");
-            dots[current].classList.add("active");
-        }
-
-        function anteriorSlide() {
-            imagens[current].classList.remove("active");
-            dots[current].classList.remove("active");
-
-            current --;
-
-            if(current<0) {
-                current = imagens.length -1;
-            }
-
-            imagens[current].classList.add("active");
-            dots[current].classList.add("active");
-        }
-
-        function irParaSlide(i) {
-            imagens[current].classList.remove("active");
-            dots[current].classList.remove("active");
             
-            current = i;
+            current ++;
+
+            if(current > imagens.length-1) {
+                current = 0;
+            }
 
             imagens[current].classList.add("active");
             dots[current].classList.add("active");
         }
 
-
-
-        botaoDireita.addEventListener("click", proximoSlide);
-        botaoEsquerda.addEventListener("click", anteriorSlide);
-
-        for (let j=0; j<dots.length; j++) {
-            dots[j].addEventListener("click", function() {
-                irParaSlide(j)
-            });
-        }
+        botaoDireito.addEventListener("click", proximoSlide);
     </script>
 </body>
 </html>
